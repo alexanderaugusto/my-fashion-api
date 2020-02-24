@@ -1,0 +1,52 @@
+const Sequelize = require("sequelize")
+const dbConfig = require("../config/database")
+
+// Rotas da aplicação
+const User = require("../models/User")
+const Card = require("../models/Card")
+const Address = require("../models/Address")
+const Cart = require("../models/Cart")
+const Product = require("../models/Product")
+const Image = require("../models/Image")
+const Order = require("../models/Order")
+const OrderProduct = require("../models/OrderProduct")
+const Status = require("../models/Status")
+const Favorite = require("../models/Favorite")
+const Company = require("../models/Company")
+const Category = require("../models/Category")
+const Brand = require("../models/Brand")
+const Subcategory = require("../models/Subcategory")
+
+const connection = new Sequelize(dbConfig)
+
+// Iniciando as rotas
+User.init(connection)
+Card.init(connection)
+Address.init(connection)
+Cart.init(connection)
+Product.init(connection)
+Image.init(connection)
+Order.init(connection)
+OrderProduct.init(connection)
+Status.init(connection)
+Favorite.init(connection)
+Company.init(connection)
+Category.init(connection)
+Brand.init(connection)
+Subcategory.init(connection)
+
+// Relacionamentos
+User.associate(connection.models)
+Card.associate(connection.models)
+Address.associate(connection.models)
+Product.associate(connection.models)
+Image.associate(connection.models)
+Order.associate(connection.models)
+OrderProduct.associate(connection.models)
+Status.associate(connection.models)
+Company.associate(connection.models)
+Category.associate(connection.models)
+Brand.associate(connection.models)
+Subcategory.associate(connection.models)
+
+module.exports = connection
