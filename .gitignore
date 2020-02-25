@@ -1,5 +1,3 @@
 node_modules/
 *.ini
 
-tmp/img/product/*
-tmp/img/user/*
