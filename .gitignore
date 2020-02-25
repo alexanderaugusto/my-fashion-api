@@ -1,4 +1,4 @@
 node_modules/
 *.ini
 
-tmp
+tmp/
