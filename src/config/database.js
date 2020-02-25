@@ -1,4 +1,4 @@
-// Conexão com o banco de dados SQL
+// Fazendo a conexão com o banco de dados SQL
 module.exports = {
   dialect: "mysql",
   host: "remotemysql.com",
