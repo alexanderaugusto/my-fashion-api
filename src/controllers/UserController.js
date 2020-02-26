@@ -139,25 +139,25 @@ module.exports = {
 
   // Altera a imagem do usuário
   async uploadImage(req, res) {
-    const id = req.userId
-    const { filename: image } = req.file
+    // const id = req.userId
+    // const { filename: image } = req.file
 
-    const user = await User.findByPk(id)
+    // const user = await User.findByPk(id)
 
-    if (!user)
-      return res.status(400).json({ cod_return: 400, message: "User not found." })
+    // if (!user)
+    //   return res.status(400).json({ cod_return: 400, message: "User not found." })
 
-    const [updated] = await User.update({ image }, { where: { id } })
+    // const [updated] = await User.update({ image }, { where: { id } })
 
-    if (!updated)
-      return res.status(400).json({ cod_return: 400, message: "Error in update image." })
+    // if (!updated)
+    //   return res.status(400).json({ cod_return: 400, message: "Error in update image." })
 
-    if (user.image !== "default-avatar.png") {
-      fs.unlink('tmp/img/user' + user.image, (err) => {
-        if (err)
-          throw err
-      })
-    }
+    // if (user.image !== "default-avatar.png") {
+    //   fs.unlink('tmp/img/user' + user.image, (err) => {
+    //     if (err)
+    //       throw err
+    //   })
+    // }
 
     return res.status(200).json({ cod_return: 200, message: "Image updted successfully." })
   }

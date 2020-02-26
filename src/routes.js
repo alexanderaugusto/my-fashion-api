@@ -74,7 +74,7 @@ routes.get("/product/search", ProductController.searchProduct) // Busca produtos
 routes.post("/product/delete", companyAuthMiddleware, ProductController.delete) // Apaga um produto do banco de dados
 
 // Product Images
-routes.post("/product/images/insert", multer(multerProductConfig).array(), ImageController.store) // Insere imagens no banco de dados
+routes.post("/product/images/insert", multer(multerProductConfig).array("files"), ImageController.store) // Insere imagens no banco de dados
 
 // Category
 routes.post("/category/create", companyAuthMiddleware, CategoryController.create) // Cria uma nova categoria

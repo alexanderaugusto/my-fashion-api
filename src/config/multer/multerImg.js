@@ -1,12 +1,16 @@
 const multer = require("multer")
 const path = require("path")
 const crypto = require("crypto")
+const mkdirp = require('mkdirp')
 
 module.exports = {
   dest: path.resolve(__dirname, "..", "..", "..", "tmp", "img", "user"),
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, path.resolve(__dirname, "..", "..", "..", "tmp", "img", "user"))
+      const dir = path.resolve(__dirname, "..", "..", "..", "tmp", "img", "user")
+      mkdirp(dir, err => cb(err, dir))
+
+      // cb(null, path.resolve(__dirname, "..", "..", "..", "tmp", "img", "user"))
     },
     filename: (req, file, cb) => {
       crypto.randomBytes(16, (err, hash) => {
@@ -14,7 +18,8 @@ module.exports = {
           cb(err)
         
         file.id = hash.toString("hex")
-        const filename = `${file.id}-${file.originalname}`
+        //const filename = `${file.id}-${file.originalname}`
+        const filename = file.originalname
         
         cb(null, filename)
       })

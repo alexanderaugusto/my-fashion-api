@@ -20,6 +20,6 @@ module.exports = {
     if (!image)
       return res.status(400).json({ cod_return: 400, message: "Invalid user submitted information." })
 
-    return res.status(200).json(image)
+    return res.status(200).json("Foi")
   },
 }
