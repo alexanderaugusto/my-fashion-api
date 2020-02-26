@@ -1,7 +1,6 @@
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const crypto = require("crypto")
-const fs = require("fs")
 
 const sequelize = require("sequelize")
 const Op = sequelize.Op
@@ -140,7 +139,8 @@ module.exports = {
   // Altera a imagem do usuário
   async uploadImage(req, res) {
     const id = req.userId
-    const { filename: image } = req.file
+    const { files } = req
+    const { key: image } = files[0]
 
     const user = await User.findByPk(id)
 
@@ -151,13 +151,6 @@ module.exports = {
 
     if (!updated)
       return res.status(400).json({ cod_return: 400, message: "Error in update image." })
-
-    if (user.image !== "default-avatar.png") {
-      fs.unlink('tmp/img/user' + user.image, (err) => {
-        if (err)
-          throw err
-      })
-    }
 
     return res.status(200).json({ cod_return: 200, message: "Image updted successfully." })
   }

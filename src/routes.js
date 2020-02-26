@@ -1,7 +1,6 @@
 const express = require("express")
 const multer = require("multer")
-const multerProductConfig = require("./config/multer/multerProduct")
-const multerImgConfig = require("./config/multer/multerImg")
+const multerConfig = require("./config/multer")
 const authMiddleware = require("./middlewares/authMiddleware")
 const companyAuthMiddleware = require("./middlewares/companyAuthMiddleware")
 
@@ -29,7 +28,7 @@ routes.post("/user/create", UserController.store) // Insere um novo usuário
 routes.get("/user/list_all", UserController.listAll) // Busca todos os usuários
 routes.get("/user/list", authMiddleware, UserController.list) // Busca todas as informações de um usuário
 routes.put("/user/update", authMiddleware, UserController.update) // Atualiza as informações de um usuário
-routes.post("/user/upload_image", multer(multerImgConfig).single("file"), authMiddleware, UserController.uploadImage) // Insere imagens no banco de dados
+routes.post("/user/upload_image", multer(multerConfig).array("files"), authMiddleware, UserController.uploadImage) // Insere imagens no banco de dados
 
 // Cart
 routes.post("/cart/insert", authMiddleware, CartController.store) // Insere um produto no carrinho do usuário
@@ -63,8 +62,8 @@ routes.put("/address/update", authMiddleware, AddressController.update) // Alter
 routes.delete("/address/delete", authMiddleware, AddressController.remove) // Remove um endereço do usuário
 
 // Products
-routes.post("/product/create", multer(multerProductConfig).array("files"), companyAuthMiddleware, ProductController.storeOne) // Insere um produto no banco de dados
-routes.post("/product/update", multer(multerProductConfig).array("files"), companyAuthMiddleware, ProductController.update) // Altera as informações de um produto
+routes.post("/product/create", multer(multerConfig).array("files"), companyAuthMiddleware, ProductController.storeOne) // Insere um produto no banco de dados
+routes.post("/product/update", multer(multerConfig).array("files"), companyAuthMiddleware, ProductController.update) // Altera as informações de um produto
 routes.get("/product/list_all", ProductController.listAll) // Lista todos os produtos do banco de dados
 routes.get("/product/list", ProductController.listOne) // Lista todas as informações de um produto
 routes.post("/product/frete_calculator", ProductController.fretePrazeCalculator) // Calcula o frete e prazo de um detrminado produto
@@ -74,7 +73,7 @@ routes.get("/product/search", ProductController.searchProduct) // Busca produtos
 routes.post("/product/delete", companyAuthMiddleware, ProductController.delete) // Apaga um produto do banco de dados
 
 // Product Images
-routes.post("/product/images/insert", multer(multerProductConfig).array("files"), ImageController.store) // Insere imagens no banco de dados
+routes.post("/product/images/insert", multer(multerConfig).array("files"), ImageController.store) // Insere imagens no banco de dados
 
 // Category
 routes.post("/category/create", companyAuthMiddleware, CategoryController.create) // Cria uma nova categoria

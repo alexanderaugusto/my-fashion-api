@@ -4,7 +4,6 @@ const Company = require("../models/Company")
 
 const sequelize = require("sequelize")
 const Op = sequelize.Op
-const fs = require("fs")
 
 module.exports = {
   // Insere um produto no banco de dados
@@ -66,15 +65,6 @@ module.exports = {
       })
     })
     const images_inserted = await Image.bulkCreate(images)
-
-    // Delete images if the user has deleted in front-end
-    images_to_delete.forEach(async image => {
-      await Image.destroy({ where: { id: image.id } })
-      fs.unlink('tmp/img/product/' + image.name, (err) => {
-        if (err)
-          throw err
-      })
-    })
 
     return res.status(200).json({ product, images_inserted })
   },
