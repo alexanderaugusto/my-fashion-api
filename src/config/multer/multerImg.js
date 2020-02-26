@@ -18,8 +18,7 @@ module.exports = {
           cb(err)
         
         file.id = hash.toString("hex")
-        //const filename = `${file.id}-${file.originalname}`
-        const filename = file.originalname
+        const filename = `${file.id}-${file.originalname}`
         
         cb(null, filename)
       })
