@@ -20,7 +20,7 @@ module.exports = {
 
     const [productInserted, inserted] = await Cart.findOrCreate({
       where: { product_id, user_id },
-      defaults: { quantity, user_id, product_id }
+      defaults: { quantity, freight: 20, praze: 10, discount: 0, user_id, product_id }
     })
 
     if (inserted)
