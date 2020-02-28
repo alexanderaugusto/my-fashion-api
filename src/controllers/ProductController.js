@@ -27,7 +27,7 @@ module.exports = {
     files.forEach(file => {
       images.push({
         id: file.id,
-        name: file.filename,
+        name: file.key,
         product_id: product_inserted.id
       })
     })
@@ -167,12 +167,9 @@ module.exports = {
       mode: 'no-cors'
     }
 
-    const freteAndPraze = await correios.calcPrecoPrazo(args)
-   
-    if (!freteAndPraze)
-      return res.status(400).json({ cod_return: 400, message: "Invalid user submitted information." })
-
-    return res.status(200).json(freteAndPraze)
+    await correios.calcPrecoPrazo(args)
+      .then((freteAndPraze) => res.status(200).json(freteAndPraze))
+      .catch(() => res.status(500).json({ cod_return: 500, message: "Error in server." }))
   },
 
   // Retorna um array de produtos baseado na pesquisa do usuário
@@ -189,9 +186,7 @@ module.exports = {
 
       where: {
         [Op.or]: [
-          { category: sequelize.where(sequelize.fn('LOWER', sequelize.col('category')), 'LIKE', '%' + string + '%') },
           { title: sequelize.where(sequelize.fn('LOWER', sequelize.col('title')), 'LIKE', '%' + string + '%'), },
-          { brand: sequelize.where(sequelize.fn('LOWER', sequelize.col('brand')), 'LIKE', '%' + string + '%'), }
         ]
       }
     })

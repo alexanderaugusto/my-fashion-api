@@ -6,7 +6,7 @@ class Status extends Model {
       name: DataTypes.STRING,
     }, {
       sequelize: connection, // Objecto para conexão com o banco de dados
-      tableName: 'Status'
+      tableName: 'status'
     })
   }
 

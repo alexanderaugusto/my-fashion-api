@@ -41,7 +41,7 @@ routes.post("/order/create", authMiddleware, OrderController.create) // Cria um 
 routes.get("/order/list_all", OrderController.listAll) // Lista todos os pedidos da loja
 routes.get("/order/list", authMiddleware, OrderController.userListAll) // Lista os pedidos de um usuário
 routes.put("/order/status/update", companyAuthMiddleware, OrderController.updateStatus) // Atualiza o status de um pedido
-routes.post("/order/status/create", authMiddleware, OrderController.createStatus) // Cria um novo status
+routes.post("/order/status/create", companyAuthMiddleware, OrderController.createStatus) // Cria um novo status
 routes.get("/order/status/list_all", authMiddleware, OrderController.listStatus) // Lista todos os status
 
 // Favorites
