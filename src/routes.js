@@ -66,7 +66,7 @@ routes.post("/product/create", multer(multerConfig).array("files"), companyAuthM
 routes.post("/product/update", multer(multerConfig).array("files"), companyAuthMiddleware, ProductController.update) // Altera as informações de um produto
 routes.get("/product/list_all", ProductController.listAll) // Lista todos os produtos do banco de dados
 routes.get("/product/list", ProductController.listOne) // Lista todas as informações de um produto
-routes.post("/product/frete_calculator", ProductController.fretePrazeCalculator) // Calcula o frete e prazo de um detrminado produto
+routes.post("/product/freight_calculator", ProductController.freightCalculator) // Calcula o frete e prazo de um detrminado produto
 routes.get("/product/list_offers", ProductController.listProductOffers) // Lista offertas relacionadas a um produto
 routes.get("/product/list_by_category", ProductController.listProductsByCategory) // Lista os produtos pela categoria
 routes.get("/product/search", ProductController.searchProduct) // Busca produtos baseado na pesquisa do usuário

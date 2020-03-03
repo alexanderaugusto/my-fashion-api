@@ -5,6 +5,8 @@ const Company = require("../models/Company")
 const sequelize = require("sequelize")
 const Op = sequelize.Op
 
+const { getFreightInfo } = require("../utils/functions")
+
 module.exports = {
   // Insere um produto no banco de dados
   async storeOne(req, res) {
@@ -146,7 +148,7 @@ module.exports = {
   },
 
   // Calcula o frete e prazo de um determinado produto
-  async fretePrazeCalculator(req, res) {
+  async freightCalculator(req, res) {
     const { product, cep_dest } = req.body
     const { zipcode: cep_origin } = product.company
 
@@ -168,7 +170,9 @@ module.exports = {
     }
 
     await correios.calcPrecoPrazo(args)
-      .then((freteAndPraze) => res.status(200).json(freteAndPraze))
+      .then((items) => {
+        res.status(200).json(getFreightInfo(items))
+      })
       .catch(() => res.status(500).json({ cod_return: 500, message: "Error in server." }))
   },
 
