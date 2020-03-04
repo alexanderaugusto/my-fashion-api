@@ -107,26 +107,6 @@ module.exports = {
     return res.status(200).json(product)
   },
 
-  // Lista os produtos pela categoria
-  async listProductsByCategory(req, res) {
-    const { product_category } = req.query
-
-    const products = await Product.findAll({
-      include: [
-        { association: "images" },
-        { association: "product_category", include: { association: "category" } },
-        { association: "product_brand" },
-        { association: "company" }
-      ],
-      where: { category: product_category },
-    })
-
-    if (!products)
-      return res.status(400).json({ cod_return: 400, message: "Invalid user submitted information." })
-
-    return res.status(200).json(products)
-  },
-
   // Lista offertas relacionadas a um determinado produto
   async listProductOffers(req, res) {
     const { product_category, product_id } = req.query
@@ -177,8 +157,8 @@ module.exports = {
   },
 
   // Retorna um array de produtos baseado na pesquisa do usuário
-  async searchProduct(req, res) {
-    const { string } = req.query
+  async filterProducts(req, res) {
+    let { string } = req.query
 
     const products = await Product.findAll({
       include: [
@@ -188,17 +168,42 @@ module.exports = {
         { association: "company" }
       ],
 
-      where: {
-        [Op.or]: [
-          { title: sequelize.where(sequelize.fn('LOWER', sequelize.col('title')), 'LIKE', '%' + string + '%'), },
-        ]
-      }
+      // where: {
+      //   [Op.or]: [
+      //     { title: sequelize.where(sequelize.fn('LOWER', sequelize.col('title')), 'LIKE', '%' + string + '%'), },
+      //   ]
+      // }
     })
+
 
     if (!products)
       return res.status(400).json({ cod_return: 400, message: "Invalid user submitted information." })
 
-    return res.status(200).json(products)
+    const filteredProducts = []
+    products.forEach(product => {
+      const title = product.title.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      const category = product.product_category.category.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      const subcategory = product.product_category.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      const brand = product.product_brand.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+      string = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+
+      console.log(title, category, subcategory, brand)
+
+      if (string.includes(title) || title.includes(string)) {
+        filteredProducts.push(product)
+      }
+      else if (string.includes(category) || category.includes(string)) {
+        filteredProducts.push(product)
+      }
+      else if (string.includes(subcategory) || subcategory.includes(string)) {
+        filteredProducts.push(product)
+      }
+      else if (string.includes(brand) || brand.includes(string)) {
+        filteredProducts.push(product)
+      }
+    })
+
+    return res.status(200).json(filteredProducts)
   },
 
   // Delete um produto do banco de dados

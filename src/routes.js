@@ -68,8 +68,7 @@ routes.get("/product/list_all", ProductController.listAll) // Lista todos os pro
 routes.get("/product/list", ProductController.listOne) // Lista todas as informações de um produto
 routes.post("/product/freight_calculator", ProductController.freightCalculator) // Calcula o frete e prazo de um detrminado produto
 routes.get("/product/list_offers", ProductController.listProductOffers) // Lista offertas relacionadas a um produto
-routes.get("/product/list_by_category", ProductController.listProductsByCategory) // Lista os produtos pela categoria
-routes.get("/product/search", ProductController.searchProduct) // Busca produtos baseado na pesquisa do usuário
+routes.get("/product/search", ProductController.filterProducts) // Busca produtos baseado na pesquisa do usuário
 routes.post("/product/delete", companyAuthMiddleware, ProductController.delete) // Apaga um produto do banco de dados
 
 // Product Images
