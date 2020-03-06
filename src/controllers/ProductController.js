@@ -187,8 +187,6 @@ module.exports = {
       const brand = product.product_brand.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
       string = string.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
 
-      console.log(title, category, subcategory, brand)
-
       if (string.includes(title) || title.includes(string)) {
         filteredProducts.push(product)
       }
