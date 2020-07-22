@@ -103,6 +103,6 @@ routes.put("/company/update", companyAuthMiddleware, CompanyController.update) /
 routes.delete("/company/delete", companyAuthMiddleware, CompanyController.delete) // Remove uma empresa
 routes.get("/company/list_users", companyAuthMiddleware, CompanyController.listUsers) // Lista todos os usuários
 routes.get("/company/list_sales", companyAuthMiddleware, CompanyController.listSales) // Lista as vendas da empresa
-routes.get("/company/list_products", companyAuthMiddleware, CompanyController.listProducts) // Lista os produtos da empresa
+routes.get("/company/list_products", companyAuthMiddleware, CompanyController.listProducts) // Lista os produtos de uma empresa
 
 module.exports = routes
