@@ -20,6 +20,8 @@
     "multer-s3": "^2.9.0",
     "mysql2": "^2.0.0",
     "node-correios": "^3.0.2",
+    "pg": "^8.3.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.2"
   },
   "devDependencies": {
