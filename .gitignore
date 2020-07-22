@@ -2,6 +2,3 @@ node_modules/
 *.ini
 
 .env
-
-tmp/uploads/*
-!tmp/uploads/.gitkeep
