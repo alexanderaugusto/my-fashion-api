@@ -1,8 +1,8 @@
-DROP DATABASE IF EXISTS central_modas;
+DROP DATABASE IF EXISTS my_fashion;
 
-CREATE DATABASE central_modas;
+CREATE DATABASE my_fashion;
 
-USE central_modas;
+USE my_fashion;
 
 DROP TABLE companies;
 CREATE TABLE IF NOT EXISTS companies(
