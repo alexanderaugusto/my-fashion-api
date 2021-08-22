@@ -7,5 +7,11 @@ module.exports = {
   define: {
     timestamps: true, // created at - updated at
     underscored: true, // snake case (my_fashion)
+  },
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
   }
 }
