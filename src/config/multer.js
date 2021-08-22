@@ -4,6 +4,8 @@ const aws = require("aws-sdk")
 const path = require("path")
 const crypto = require("crypto")
 const mkdirp = require('mkdirp')
+const cloudinary = require('./cloudinary')
+const { CloudinaryStorage } = require('multer-storage-cloudinary')
 
 const storageTypes = {
   local: multer.diskStorage({
@@ -41,6 +43,20 @@ const storageTypes = {
 
         cb(null, filename)
       })
+    }
+  }),
+
+  cloudinary: new CloudinaryStorage({
+    cloudinary,
+    params: {
+      folder: 'my-fashion/uploads',
+      public_id: (req, file) => {
+        const hash = crypto.randomBytes(16).toString('hex')
+        const filename = `${hash}-${file.originalname}`
+        file.key = filename
+
+        return filename.split('.').slice(0, -1).join('.')
+      }
     }
   })
 }

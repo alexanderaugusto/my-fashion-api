@@ -5,6 +5,7 @@ const routes = require("./routes")
 const cors = require("cors")
 const morgan = require("morgan")
 const path = require("path")
+const bcrypt = require("bcryptjs")
 
 require("./database")
 
