@@ -8,9 +8,9 @@ VALUES ('Adidas', '2020-07-22', '2020-07-22'), ('Asics', '2020-07-22', '2020-07-
 ('Puma', '2020-07-22', '2020-07-22'), ('Umbro', '2020-07-22', '2020-07-22'), ('Mormaii', '2020-07-22', '2020-07-22'), ('Outra', '2020-07-22', '2020-07-22');
 
 INSERT INTO categories (name, image, created_at, updated_at) 
-VALUES ('Calçados', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22'), ('Roupas', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22'), 
-('Acessórios', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22'), ('Eletrônicos', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22'),
-('Mais categorias', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22');
+VALUES ('Calçados', 'fas fa-shoe-prints', '2020-07-22', '2020-07-22'), ('Roupas', 'fas fa-tshirt', '2020-07-22', '2020-07-22'), 
+('Acessórios', 'fas fa-glasses', '2020-07-22', '2020-07-22'), ('Eletrônicos', 'fas fa-bolt', '2020-07-22', '2020-07-22'),
+('Mais categorias', 'fas fa-plus-square', '2020-07-22', '2020-07-22');
 
 INSERT INTO subcategories (name, category_id, created_at, updated_at) 
 VALUES ('Botas', 1, '2020-07-22', '2020-07-22'), ('Chinelos', 1, '2020-07-22', '2020-07-22'), ('Chuteiras', 1, '2020-07-22', '2020-07-22'), 

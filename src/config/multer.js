@@ -53,8 +53,10 @@ const storageTypes = {
       public_id: (req, file) => {
         const hash = crypto.randomBytes(16).toString('hex')
         const filename = `${hash}-${file.originalname}`
-        file.key = filename
 
+        file.id = hash
+        file.key = filename
+     
         return filename.split('.').slice(0, -1).join('.')
       }
     }
