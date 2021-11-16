@@ -8,7 +8,7 @@
     "start": "node src/server.js"
   },
   "dependencies": {
-    "aws-sdk": "^2.627.0",
+    "aws-sdk": "^2.814.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.26.3",
     "cors": "^2.8.5",
